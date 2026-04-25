@@ -1,0 +1,9 @@
+.nav-bar{
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    color: var(--text-secondary);
+}
+.nav-bar li{
+    list-style: none;
+}

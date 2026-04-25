@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--primary);
+  color: var(--text-primary);
+}
+
+html, body {
+  height: 100%;
+}
+
+.general-layout {
+  display: grid;
+  grid-template-rows: 30px 1fr 60px;
+  min-height: 100vh;
+}
