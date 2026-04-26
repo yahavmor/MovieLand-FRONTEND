@@ -1,9 +1,12 @@
-export function NavBar(){
+import { Link } from "react-router-dom";
+
+export function NavBar(){   
     return(
             <nav className="nav-bar">
-                <li>Movie List</li>
-                <li>Register</li>
-                <li>About</li>
+                <li><Link to="/home">Home Page</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/movies">Movie List</Link></li>
+                <li><Link to="/register">Register</Link></li>
             </nav>                      
         )
 }
