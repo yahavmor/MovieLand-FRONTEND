@@ -1,5 +1,11 @@
+import { MovieList } from "../cmp/MovieList.jsx";
+
+
 export function MovieIndex(){
+
     return(
-        <div>Moviesss</div>
+        <div className='movie-index'>
+            <MovieList/>
+        </div>
     )
 }

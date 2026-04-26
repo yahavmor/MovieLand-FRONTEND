@@ -1,5 +1,25 @@
+import MovieService from '../services/movie.service.js'
+import {useEffect, useState} from 'react'
+import {MoviePreview} from './MoviePreview.jsx'
 export function MovieList(){
+    const [movies,setMovies] = useState([])
+    function loadMovies(){
+        setMovies(MovieService.loadMovies())
+    }
+    useEffect(()=>{
+        loadMovies()
+    },[])
+    
+    if (!Object.keys(movies).length) return <div>No movies to show</div>
     return(
-        <div>Moviess list</div>
+        <div className='movie-list'>
+            <ul>
+            {Object.keys(movies).map(id => (
+                <li key={id}>
+                <MoviePreview />
+                </li>
+            ))}
+            </ul>
+        </div>
     )
 }
