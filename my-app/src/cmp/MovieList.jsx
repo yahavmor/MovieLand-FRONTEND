@@ -13,13 +13,14 @@ export function MovieList(){
     if (!Object.keys(movies).length) return <div>No movies to show</div>
     return(
         <div className='movie-list'>
-            <ul>
-            {Object.keys(movies).map(id => (
-                <li key={id}>
-                <MoviePreview />
-                </li>
-            ))}
+            <ul className="movie-table">
+                {Object.keys(movies).map(id => (
+                    <li key={id}>
+                    <MoviePreview movie={movies[id]} />
+                    </li>
+                ))}
             </ul>
+
         </div>
     )
 }
