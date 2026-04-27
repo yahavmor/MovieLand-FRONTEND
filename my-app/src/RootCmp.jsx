@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { MovieIndex } from "./pages/MovieIndex";
-import { MovieDetails } from "./pages/MovieDetails";
+import { Home } from "./pages/Home.jsx";
+import { MovieIndex } from "./pages/MovieIndex.jsx";
+import { MovieDetails } from "./pages/MovieDetails.jsx";
 import { RegisterForm } from "./pages/RegisterForm.jsx";
 import { About } from "./pages/About.jsx";
 

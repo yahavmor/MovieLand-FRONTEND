@@ -1,0 +1,20 @@
+.footer {
+    padding: 1.5rem 2rem;
+    background: var(--bg-light);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  
+  .footer:hover {
+    background: rgba(0,0,0,0.03);
+    transition: background .3s ease;
+  }
+  

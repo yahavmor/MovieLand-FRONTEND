@@ -1,8 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  background-color: var(--primary);
+  box-sizing: border-box;   
   color: var(--text-primary);
 }
 li{
