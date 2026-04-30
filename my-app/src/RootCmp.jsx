@@ -4,6 +4,7 @@ import { MovieIndex } from "./pages/MovieIndex.jsx";
 import { MovieDetails } from "./pages/MovieDetails.jsx";
 import { RegisterForm } from "./pages/RegisterForm.jsx";
 import { About } from "./pages/About.jsx";
+import { UserPage } from "./pages/UserPage.jsx";
 
 
 export function RootCmp() {
@@ -14,6 +15,8 @@ export function RootCmp() {
       <Route path="/about" element={<About />} />
       <Route path="/movies" element={<MovieIndex />} />
       <Route path="/movies/:id" element={<MovieDetails />} />
+      <Route path="/me" element={<UserPage />} />
+
     </Routes>
   );
 }

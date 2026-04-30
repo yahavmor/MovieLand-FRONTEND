@@ -8,7 +8,8 @@ export function RegisterForm() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [formData,setFormData] = useState(userService.defaultUser)
-    console.log(formData)
+
+    
     function handleChange(e){
         const {value,name} = e.target
         setFormData(prev => ({
@@ -17,10 +18,17 @@ export function RegisterForm() {
           }))
         }
     
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
-        const isAllFiled = userService.checkIfAllFilled(formdata)
+        const isAllFiled = userService.checkIfAllFilled(formData)
+        console.log(isAllFiled)
         if (!isAllFiled) return
+        const imgUrl = await userService.getUserImage()
+        console.log(imgUrl)
+        setFormData(prev=>({
+            ...prev,
+            imgUrl
+        }))
         dispatch(updateUser(formData))
         navigate('/')
     }

@@ -1,16 +1,25 @@
+import axios from 'axios'
+
 let defaultUser =  {
     fullName:'',
     email:'',
-    password:''
+    password:'',
+    imgUrl:''
 }
 export const userService = {
     defaultUser,
-    checkIfAllFilled
+    checkIfAllFilled,
+    getUserImage
 }
 
 
 
 function checkIfAllFilled(obj){
-    return isAllFilled = Object.values(obj).every(value => value !== "")
+    return Object.values(obj).every(value => value !== "")
+}
+
+async function getUserImage(){
+    const imgUrl = await axios.get('https://randomuser.me/api/')
+    return imgUrl
 }
 export default userService
