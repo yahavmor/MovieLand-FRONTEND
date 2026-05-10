@@ -1,0 +1,50 @@
+.movie-searchBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.movie-searchBar form {
+  display: flex;
+  align-items: center;
+  background: #1c1c1c;
+  padding: 0.6rem 1rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  gap: 0.6rem;
+}
+
+.movie-searchBar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.1rem;
+  width: 250px;
+}
+
+.movie-searchBar input::placeholder {
+  color: #aaaaaa;
+}
+
+.movie-searchBar button {
+  background: #ff3d3d;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.movie-searchBar button:hover {
+  background: #ff1f1f;
+  transform: translateY(-2px);
+}
+
+.movie-searchBar button:active {
+  transform: scale(0.95);
+}
