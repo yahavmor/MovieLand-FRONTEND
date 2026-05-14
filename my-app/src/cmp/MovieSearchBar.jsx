@@ -9,19 +9,22 @@ export function MovieSearchBar() {
   const dispatch = useDispatch()
   const movies  = useSelector(state=>state.movie.movies)
 
-  async function handleSubmit(e) {
-    e.preventDefault()
-    if (!searchTerm) return
-    const movie = await MovieService.searchMovie(searchTerm)
-    const isMovieDuplicated = MovieService.isMovieDuplicate(movie,movies)
-    if(!isMovieDuplicated){
-      dispatch(setMovie(movie))
-      dispatch(addMovie(movie))
+async function handleSubmit(e) {
+  e.preventDefault();
+  if (!searchTerm) return;
+  const movie = await MovieService.searchMovie(searchTerm);
+  const isRealMovie = MovieService.isRealMovie(movie);
+  const isMovieDuplicated = MovieService.isMovieDuplicate(movie, movies);
+  if (isRealMovie) {
+    if (!isMovieDuplicated) {
+      dispatch(setMovie(movie));
+      dispatch(addMovie(movie));
     }
-    else{
-      console.log('already searched!!!')
-    }
+  } else {
+    console.log('error searching');
   }
+}
+
 
   return (
     <div className="movie-searchBar">

@@ -6,10 +6,14 @@ const MovieService = {
     loadMovies,
     searchMovie,
     loadMovie,
-    isMovieDuplicate
+    isMovieDuplicate,
+    isRealMovie
 }
 function isMovieDuplicate(movie, movies) {
   return movies.some(m => m.imdbID === movie.imdbID);
+}
+function isRealMovie(movie){
+  return movie.Response === "True";
 }
 
 
