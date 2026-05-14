@@ -66,3 +66,22 @@
   font-size: 1.5rem;
   color: var(--text-secondary);
 }
+.btn-back {
+  cursor: pointer;
+  color: var(--primary);
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 50px;
+  border: 1px solid var(--primary);
+  background: transparent;
+  transition: 0.25s ease;
+  justify-content:center
+}
+
+.btn-back:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateX(-3px);
+}

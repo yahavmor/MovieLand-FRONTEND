@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import MovieService from '../services/movie.service'
+
 
 export function MovieDetails() {
   const [movie, setMovie] = useState(null)
   const params = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadMovie()
@@ -42,6 +44,7 @@ export function MovieDetails() {
             <p><strong>Actors:</strong> {movie.Actors}</p>
             <p><strong>IMDb Rating:</strong> ⭐ {movie.imdbRating}</p>
           </div>
+          <button className='btn-back' onClick={()=>navigate('/movies')}>🔙 Go Back </button>
 
         </div>
       </div>

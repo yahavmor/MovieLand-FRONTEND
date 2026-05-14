@@ -3,8 +3,9 @@
 @import url('./cmp/Footer.css');
 @import url('./cmp/About.css');
 @import url('./cmp/MovieSearchBar.css');
+@import url('./cmp/NoMovies.css');
 
-
+ 
 
 /* pages */
 @import url('./pages/Home.css');
