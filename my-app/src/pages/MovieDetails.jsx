@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import MovieService from '../services/movie.service'
 
 
 export function MovieDetails() {
   const [movie, setMovie] = useState(null)
+  const [trailer, setTrailer] = useState(null)
   const params = useParams()
   const navigate = useNavigate()
 
@@ -14,7 +15,9 @@ export function MovieDetails() {
 
   async function loadMovie() {
     const movie = await MovieService.loadMovie(params.id)
+    const trailer = await MovieService.loadTrailer(movie.Title)
     setMovie(movie)
+    setTrailer(trailer)
   }
 
   if (!movie) return <div className="loading">Loading...</div>
@@ -43,6 +46,9 @@ export function MovieDetails() {
             <p><strong>Director:</strong> {movie.Director}</p>
             <p><strong>Actors:</strong> {movie.Actors}</p>
             <p><strong>IMDb Rating:</strong> ⭐ {movie.imdbRating}</p>
+            <Link to={trailer} target="_blank" rel="noopener noreferrer">
+              Link to official trailer
+            </Link>
           </div>
           <button className='btn-back' onClick={()=>navigate('/movies')}>🔙 Go Back </button>
 
