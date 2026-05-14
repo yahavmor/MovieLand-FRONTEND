@@ -1,5 +1,50 @@
-export function MovieDetails(){
-    return(
-        <div>Movie detailss</div>
-    )
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import MovieService from '../services/movie.service'
+
+export function MovieDetails() {
+  const [movie, setMovie] = useState(null)
+  const params = useParams()
+
+  useEffect(() => {
+    loadMovie()
+  }, [])
+
+  async function loadMovie() {
+    const movie = await MovieService.loadMovie(params.id)
+    setMovie(movie)
+  }
+
+  if (!movie) return <div className="loading">Loading...</div>
+
+  return (
+    <div className="movie-details">
+      <div className="movie-card">
+
+      {movie.Poster && movie.Poster !== "N/A" && (
+        <img className="movie-poster" src={movie.Poster} alt={movie.Title} />
+      )}
+        <div className="movie-content">
+          <h1 className="movie-title">{movie.Title}</h1>
+
+          <div className="movie-meta">
+            <span>📅 {movie.Year}</span>
+            <span>⏱ {movie.Runtime}</span>
+            <span>🔞 {movie.Rated}</span>
+          </div>
+
+          <p className="movie-plot">{movie.Plot}</p>
+
+          <div className="movie-info">
+            <p><strong>Released:</strong> {movie.Released}</p>
+            <p><strong>Genre:</strong> {movie.Genre}</p>
+            <p><strong>Director:</strong> {movie.Director}</p>
+            <p><strong>Actors:</strong> {movie.Actors}</p>
+            <p><strong>IMDb Rating:</strong> ⭐ {movie.imdbRating}</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  )
 }

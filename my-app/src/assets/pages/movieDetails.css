@@ -1,0 +1,68 @@
+.movie-details {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--black);
+  color: var(--text-primary);
+}
+
+.movie-card {
+  display: flex;
+  gap: 2rem;
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 18px;
+  max-width: 1000px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.movie-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
+  background: var(--bg-light);
+}
+
+
+.movie-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.movie-title {
+  font-size: 2.4rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.movie-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.movie-plot {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.movie-info p {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.movie-info strong {
+  color: var(--primary);
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}

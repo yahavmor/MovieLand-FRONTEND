@@ -7,13 +7,20 @@ import { useDispatch, useSelector } from 'react-redux'
 export function MovieSearchBar() {
   const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
+  const movies  = useSelector(state=>state.movie.movies)
 
   async function handleSubmit(e) {
     e.preventDefault()
     if (!searchTerm) return
     const movie = await MovieService.searchMovie(searchTerm)
-    dispatch(setMovie(movie))
-    dispatch(addMovie(movie))
+    const isMovieDuplicated = MovieService.isMovieDuplicate(movie,movies)
+    if(!isMovieDuplicated){
+      dispatch(setMovie(movie))
+      dispatch(addMovie(movie))
+    }
+    else{
+      console.log('already searched!!!')
+    }
   }
 
   return (

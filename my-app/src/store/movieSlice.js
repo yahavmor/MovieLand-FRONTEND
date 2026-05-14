@@ -16,7 +16,7 @@ const movieSlice = createSlice({
       state.movies = action.payload
     },
     addMovie(state, action) {
-      state.movies.push(action.payload)
+      state.movies.unshift(action.payload)
     }
   }
 })
