@@ -18,9 +18,10 @@ async function loadTrailer(movieName){
     return findMainTrailer(videosRes.data.results)
 }
 function findMainTrailer(trailers){
-    const trailerObj = trailers.find(trailer=>trailer.name==='Official Trailer')
-    return `https://www.youtube.com/watch?v=${trailerObj.key}`
+const trailerObj = trailers.find(trailer =>trailer.name.toLowerCase().includes("trailer"));
+return `https://www.youtube.com/watch?v=${trailerObj.key}`
 }
+
 function isMovieDuplicate(movie, movies) {
   return movies.some(m => m.imdbID === movie.imdbID);
 }

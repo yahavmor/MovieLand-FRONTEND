@@ -23,6 +23,7 @@ async function handleSubmit(e) {
   } else {
     console.log('error searching');
   }
+  setSearchTerm('')
 }
 
 
