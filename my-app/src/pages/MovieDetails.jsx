@@ -16,18 +16,25 @@ export function MovieDetails() {
     loadMovie()
   }, [])
 
-  async function loadMovie() {
-    try{
-      const movie = await MovieService.loadMovie(params.id)
+async function loadMovie() {
+  try {
+    const movie = await MovieService.loadMovie(params.id)
+    setMovie(movie)
+    try {
       const trailer = await MovieService.loadTrailer(movie.Title)
-      setMovie(movie)
       setTrailer(trailer)
-      dispatch(setMsg({ text: "Movie has been loaded", condition: true }));
+    } catch (err) {
+      console.warn("Trailer not found:", err)
+      setTrailer(null)
     }
-    catch{
-      dispatch(setMsg({ text: "Movie has not been loaded", condition: false }));
-    }
+    dispatch(setMsg({ text: "Movie has been loaded", condition: true }))
+  } 
+  catch (err) {
+    console.error(err)
+    dispatch(setMsg({ text: "Movie has not been loaded", condition: false }))
   }
+}
+
 
   if (!movie) return <div className="loading">Loading...</div>
 

@@ -4,7 +4,6 @@ const BaseUrl = 'https://www.omdbapi.com/?apikey=17be2e3'
 const TrailerApiKey = 'eb6c17a5d4e99a8645ef8d325261f6a7'
 
 const MovieService = {
-    loadMovies,
     searchMovie,
     loadMovie,
     isMovieDuplicate,
@@ -38,10 +37,6 @@ function isRealMovie(movie){
   return movie.Response === "True";
 }
 
-
-function loadMovies(){
-    return movies
-}
 async function loadMovie(movieId){
     const res = await axios.get(BaseUrl+'&i='+movieId)
     return res.data
