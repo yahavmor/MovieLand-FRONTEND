@@ -1,0 +1,25 @@
+.user-msg {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 300px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.user-msg.good {
+  background-color: #4caf50;
+}
+
+.user-msg.bad {
+  background-color: #f44336;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

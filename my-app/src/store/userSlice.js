@@ -1,10 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  fullName: "",
-  email: "",
-  password: "",
-  imgUrl:''
+  user:{
+    fullName: "",
+    email: "",
+    password: "",
+    imgUrl: '',
+  },
+  msg:{
+    text:'',
+    condition:true
+  }
 }
 
 const userSlice = createSlice({
@@ -12,10 +18,17 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     updateUser(state, action) {
-      return { ...state, ...action.payload }
+      state.user = { ...state.user, ...action.payload }
+    },
+    setMsg(state, action) {
+      state.msg = { ...state.msg, ...action.payload }
+    },
+    clearMsg(state) {
+      state.msg = { text: "", condition: true }
     }
   }
 })
 
-export const { updateUser } = userSlice.actions
+
+export const { updateUser, setMsg, clearMsg} = userSlice.actions
 export default userSlice.reducer

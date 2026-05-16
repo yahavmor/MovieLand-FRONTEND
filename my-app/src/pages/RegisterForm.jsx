@@ -1,36 +1,42 @@
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../../src/store/userSlice.js'
+import { setMsg, updateUser } from '../../src/store/userSlice.js'
 import { useNavigate } from 'react-router-dom'
 import userService from '../services/user.service.js'
+import { UserMsg } from '../cmp/UserMsg.jsx'
+
 
 export function RegisterForm() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [formData,setFormData] = useState(userService.defaultUser)
-
+    const user = useSelector(state=>state.user)
     
     function handleChange(e){
         const {value,name} = e.target
         setFormData(prev => ({
-            ...prev,
-            [name]: value
-          }))
-        }
+        ...prev,
+        [name]: value
+        }))
+    }
+    
     
     async function handleSubmit(e){
-        e.preventDefault()
-        const isAllFiled = userService.checkIfAllFilled(formData)
-        console.log(isAllFiled)
-        if (!isAllFiled) return
-        const imgUrl = await userService.getUserImage()
-        console.log(imgUrl)
-        setFormData(prev=>({
-            ...prev,
-            imgUrl
-        }))
-        dispatch(updateUser(formData))
-        navigate('/')
+    e.preventDefault();
+    const isAllFiled = userService.checkIfAllFilled(formData);
+    if (!isAllFiled){
+        dispatch(setMsg({ text: "Please fill all fields!", condition: false }));
+        return;
+    }
+    const imgUrl = await userService.getUserImage();
+    const updatedUser = { 
+        ...formData, 
+        imgUrl 
+    };
+    setFormData(updatedUser);
+    dispatch(updateUser(updatedUser));
+    dispatch(setMsg({ text: "User Registered!", condition: true }));
+    navigate('/');
     }
     return (
             <form className="register-form" onSubmit={(e)=>handleSubmit(e)}>

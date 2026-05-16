@@ -17,9 +17,18 @@ async function loadTrailer(movieName){
     const videosRes = await axios.get(`https://api.themoviedb.org/3/movie/${TdmbMovie.id}/videos?api_key=${TrailerApiKey}`)
     return findMainTrailer(videosRes.data.results)
 }
-function findMainTrailer(trailers){
-const trailerObj = trailers.find(trailer =>trailer.name.toLowerCase().includes("trailer"));
-return `https://www.youtube.com/watch?v=${trailerObj.key}`
+function findMainTrailer(trailers) {
+  if (!Array.isArray(trailers) || trailers.length === 0) {
+    return null;
+  }
+  const trailerObj = trailers.find(t =>
+    t.name?.toLowerCase().includes("trailer")
+  );
+  if (!trailerObj) {
+    throw new Error("No trailer found");
+  }
+
+  return `https://www.youtube.com/watch?v=${trailerObj.key}`;
 }
 
 function isMovieDuplicate(movie, movies) {

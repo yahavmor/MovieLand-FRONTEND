@@ -85,3 +85,29 @@
   color: white;
   transform: translateX(-3px);
 }
+.trailer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin-top: 12px;
+  background: #ff0000;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(255,0,0,0.3);
+}
+
+.trailer-link:hover {
+  background: #cc0000;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(255,0,0,0.45);
+}
+
+.trailer-link::before {
+  content: "▶";
+  font-size: 1.1rem;
+}
+

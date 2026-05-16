@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import MovieService from '../services/movie.service'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMsg } from '../store/userSlice'
 
 
 export function MovieDetails() {
@@ -8,16 +10,23 @@ export function MovieDetails() {
   const [trailer, setTrailer] = useState(null)
   const params = useParams()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     loadMovie()
   }, [])
 
   async function loadMovie() {
-    const movie = await MovieService.loadMovie(params.id)
-    const trailer = await MovieService.loadTrailer(movie.Title)
-    setMovie(movie)
-    setTrailer(trailer)
+    try{
+      const movie = await MovieService.loadMovie(params.id)
+      const trailer = await MovieService.loadTrailer(movie.Title)
+      setMovie(movie)
+      setTrailer(trailer)
+      dispatch(setMsg({ text: "Movie has been loaded", condition: true }));
+    }
+    catch{
+      dispatch(setMsg({ text: "Movie has not been loaded", condition: false }));
+    }
   }
 
   if (!movie) return <div className="loading">Loading...</div>
@@ -46,7 +55,7 @@ export function MovieDetails() {
             <p><strong>Director:</strong> {movie.Director}</p>
             <p><strong>Actors:</strong> {movie.Actors}</p>
             <p><strong>IMDb Rating:</strong> ⭐ {movie.imdbRating}</p>
-            <Link to={trailer} target="_blank" rel="noopener noreferrer">
+            <Link className='trailer-link' to={trailer} target="_blank" rel="noopener noreferrer">
               Link to official trailer
             </Link>
           </div>

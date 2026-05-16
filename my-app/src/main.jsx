@@ -6,16 +6,14 @@ import { NavBar } from './cmp/NavBar.jsx'
 import { Footer } from './cmp/Footer.jsx'
 import store from '../src/store/store.js'
 import { Provider } from 'react-redux'
+import { UserMsg } from './cmp/UserMsg.jsx'
+import { App } from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <StrictMode>
       <BrowserRouter>
-        <div className='general-layout'>
-          <NavBar />
-          <RootCmp />
-          <Footer />
-        </div>
+      <App/>
       </BrowserRouter>
     </StrictMode>
   </Provider>

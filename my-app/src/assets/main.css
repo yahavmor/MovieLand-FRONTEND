@@ -4,6 +4,8 @@
 @import url('./cmp/About.css');
 @import url('./cmp/MovieSearchBar.css');
 @import url('./cmp/NoMovies.css');
+@import url('./cmp/UserMsg.css');
+
 
  
 
@@ -12,7 +14,9 @@
 @import url('./pages/MoviePreview.css');
 @import url('./pages/MovieList.css');
 @import url('./pages/RegisterForm.css');
-@import url('./pages/movieDetails.css');
+@import url('./pages/MovieDetails.css');
+@import url('./pages/UserPage.css');
+
 
 
 
