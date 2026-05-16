@@ -16,25 +16,26 @@ export function MovieDetails() {
     loadMovie()
   }, [])
 
-async function loadMovie() {
-  try {
-    const movie = await MovieService.loadMovie(params.id)
-    setMovie(movie)
+  async function loadMovie() {
     try {
-      const trailer = await MovieService.loadTrailer(movie.Title)
-      setTrailer(trailer)
-    } catch (err) {
-      console.warn("Trailer not found:", err)
-      setTrailer(null)
-    }
-    dispatch(setMsg({ text: "Movie has been loaded", condition: true }))
-  } 
-  catch (err) {
-    console.error(err)
-    dispatch(setMsg({ text: "Movie has not been loaded", condition: false }))
-  }
-}
+      const movie = await MovieService.searchMovieById(params.id)
+      setMovie(movie)
 
+      try {
+        const trailer = await MovieService.getTrailer(movie.title)
+        setTrailer(trailer)
+      } catch (err) {
+        console.warn("Trailer not found:", err)
+        setTrailer(null)
+      }
+
+      dispatch(setMsg({ text: "Movie has been loaded", condition: true }))
+    } 
+    catch (err) {
+      console.error(err)
+      dispatch(setMsg({ text: "Movie has not been loaded", condition: false }))
+    }
+  }
 
   if (!movie) return <div className="loading">Loading...</div>
 
@@ -42,32 +43,40 @@ async function loadMovie() {
     <div className="movie-details">
       <div className="movie-card">
 
-      {movie.Poster && movie.Poster !== "N/A" && (
-        <img className="movie-poster" src={movie.Poster} alt={movie.Title} />
-      )}
+        {movie.poster_path && (
+          <img 
+            className="movie-poster" 
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
+            alt={movie.title} 
+          />
+        )}
+
         <div className="movie-content">
-          <h1 className="movie-title">{movie.Title}</h1>
+          <h1 className="movie-title">{movie.title}</h1>
 
           <div className="movie-meta">
-            <span>📅 {movie.Year}</span>
-            <span>⏱ {movie.Runtime}</span>
-            <span>🔞 {movie.Rated}</span>
+            <span>📅 {movie.release_date?.slice(0,4)}</span>
+            <span>⭐ {movie.vote_average}</span>
+            <span>🔥 {movie.popularity}</span>
           </div>
 
-          <p className="movie-plot">{movie.Plot}</p>
+          <p className="movie-plot">{movie.overview}</p>
 
           <div className="movie-info">
-            <p><strong>Released:</strong> {movie.Released}</p>
-            <p><strong>Genre:</strong> {movie.Genre}</p>
-            <p><strong>Director:</strong> {movie.Director}</p>
-            <p><strong>Actors:</strong> {movie.Actors}</p>
-            <p><strong>IMDb Rating:</strong> ⭐ {movie.imdbRating}</p>
-            <Link className='trailer-link' to={trailer} target="_blank" rel="noopener noreferrer">
-              Link to official trailer
-            </Link>
-          </div>
-          <button className='btn-back' onClick={()=>navigate('/movies')}>🔙 Go Back </button>
+            <p><strong>Release Date:</strong> {movie.release_date}</p>
+            <p><strong>Rating:</strong> {movie.vote_average}</p>
+            <p><strong>Votes:</strong> {movie.vote_count}</p>
 
+            {trailer && (
+              <Link className='trailer-link' to={trailer} target="_blank">
+                Watch Trailer
+              </Link>
+            )}
+          </div>
+
+          <button className='btn-back' onClick={() => navigate('/movies')}>
+            🔙 Go Back
+          </button>
         </div>
       </div>
     </div>

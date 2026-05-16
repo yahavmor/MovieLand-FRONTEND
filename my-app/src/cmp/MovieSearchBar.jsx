@@ -14,7 +14,7 @@ export function MovieSearchBar() {
 async function handleSubmit(e) {
   e.preventDefault();
   if (!searchTerm) return;
-  const movie = await MovieService.searchMovie(searchTerm);
+  const movie = await MovieService.searchMovieByName(searchTerm);
   const isRealMovie = MovieService.isRealMovie(movie);
   const isMovieDuplicated = MovieService.isMovieDuplicate(movie, movies);
   if (isRealMovie) {
@@ -30,19 +30,29 @@ async function handleSubmit(e) {
   }
   setSearchTerm('')
 }
+async function handleExplor(){
+  const randMovie = await MovieService.explorMovie()
+  dispatch(setMovie(randMovie));
+  dispatch(addMovie(randMovie));
+  dispatch(setMsg({ text: "Movie added successfully!", condition: true }));
+}
 
 
   return (
     <div className="movie-searchBar">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={searchTerm}
-          placeholder="Search anything..."
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button>Search</button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={searchTerm}
+            placeholder="Search anything..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button>Search</button>
+        </form>
+      <section className="explor">
+        <h3 className="or">Or</h3>
+        <button className="explor-btn" onClick={()=>{handleExplor()}}>Explor</button>
+      </section>
     </div>
   )
 }

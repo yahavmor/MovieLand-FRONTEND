@@ -12,7 +12,7 @@ export function MovieList(){
         <div className='movie-list'>
             <ul className="movie-table">
                 {movies.map(movie => (
-                <li key={movie.imdbID}>
+                <li key={movie.id}>
                     <MoviePreview movie={movie} />
                 </li>
                 ))}

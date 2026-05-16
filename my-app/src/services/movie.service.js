@@ -1,21 +1,36 @@
 import axios from 'axios'
+import { getRandInt } from './utils'
 
-const BaseUrl = 'https://www.omdbapi.com/?apikey=17be2e3'
-const TrailerApiKey = 'eb6c17a5d4e99a8645ef8d325261f6a7'
+const TDMB_KEY = 'eb6c17a5d4e99a8645ef8d325261f6a7'
 
 const MovieService = {
-    searchMovie,
-    loadMovie,
-    isMovieDuplicate,
-    isRealMovie,
-    loadTrailer
+  searchMovieByName,
+  searchMovieById,
+  isMovieDuplicate,
+  isRealMovie,
+  getTrailer,
+  explorMovie
 }
-async function loadTrailer(movieName){
-    const moviesRes = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${TrailerApiKey}&query=${movieName}`)
-    const TdmbMovie = moviesRes.data.results[0]
-    const videosRes = await axios.get(`https://api.themoviedb.org/3/movie/${TdmbMovie.id}/videos?api_key=${TrailerApiKey}`)
-    return findMainTrailer(videosRes.data.results)
+async function searchMovieById(movieId) {
+  const res = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TDMB_KEY}&language=en-US`
+  );
+  return res.data;
 }
+async function searchMovieByName(movieName) {
+  const res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${TDMB_KEY}&query=${movieName}&language=en-US`);
+  return res.data.results[0]; 
+}
+async function getTrailers(movie) {
+  const videosRes = await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${TDMB_KEY}`)
+  return videosRes.data.results
+}
+async function getTrailer(movieName){
+  const tdmbMovie = await searchMovieByName(movieName) 
+  const trailers = await getTrailers(tdmbMovie)
+  return await findMainTrailer(trailers)
+}
+
 function findMainTrailer(trailers) {
   if (!Array.isArray(trailers) || trailers.length === 0) {
     return null;
@@ -29,22 +44,20 @@ function findMainTrailer(trailers) {
 
   return `https://www.youtube.com/watch?v=${trailerObj.key}`;
 }
+async function explorMovie() {
+  const randPage = getRandInt(1, 500);
+  const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${TDMB_KEY}&page=${randPage}`);
+  const movies = res.data.results;
+  const randIndex = getRandInt(0, movies.length - 1);
+  return movies[randIndex];
+}
 
+    
 function isMovieDuplicate(movie, movies) {
-  return movies.some(m => m.imdbID === movie.imdbID);
+  return movies.some(m => m.id === movie.id);
 }
-function isRealMovie(movie){
-  return movie.Response === "True";
-}
-
-async function loadMovie(movieId){
-    const res = await axios.get(BaseUrl+'&i='+movieId)
-    return res.data
-}
-
-async function searchMovie(movieName){
-    const res = await axios.get(BaseUrl +'&t='+ movieName)
-    return res.data
+function isRealMovie(movie) {
+  return movie && movie.id;
 }
 export default MovieService
 
