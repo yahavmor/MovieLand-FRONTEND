@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   user:{
-    fullName: "",
-    email: "",
-    password: "",
-    imgUrl: '',
-  },
+  fullName: "",
+  email: "",
+  password: "",
+  imgUrl: '',
+  id:null},
   msg:{
     text:'',
     condition:true

@@ -4,6 +4,8 @@ import { setMsg, updateUser } from '../../src/store/userSlice.js'
 import { useNavigate } from 'react-router-dom'
 import userService from '../services/user.service.js'
 import { UserMsg } from '../cmp/UserMsg.jsx'
+import { authService } from '../services/auth.service.js'
+
 
 
 export function RegisterForm() {
@@ -33,9 +35,11 @@ export function RegisterForm() {
         ...formData, 
         imgUrl 
     };
-    setFormData(updatedUser);
-    dispatch(updateUser(updatedUser));
-    dispatch(setMsg({ text: "User Registered!", condition: true }));
+    const loggedInUser = await authService.signup(updatedUser)
+    console.log(loggedInUser)
+    setFormData(loggedInUser);
+    dispatch(updateUser(loggedInUser));
+    dispatch(setMsg({ text:`${loggedInUser.fullName} has been Registered!`, condition: true }));
     navigate('/');
     }
     return (

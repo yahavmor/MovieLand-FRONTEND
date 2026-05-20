@@ -2,6 +2,7 @@ import axios from 'axios'
 import { getRandInt } from './utils'
 
 const TDMB_KEY = 'eb6c17a5d4e99a8645ef8d325261f6a7'
+const BASE_MOVIE_URL = 'http://localhost:3000/api/movie'
 
 const MovieService = {
   searchMovieByName,
@@ -9,8 +10,23 @@ const MovieService = {
   isMovieDuplicate,
   isRealMovie,
   getTrailer,
-  explorMovie
+  explorMovie,
+  addToLikedMovies
 }
+async function addToLikedMovies(movie, userId) {
+  const movieShort = {
+    title: movie.title,
+    overview: movie.overview,
+    tagline: movie.tagline,
+    poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+    date: movie.release_date?.slice(0,4),
+    rating: movie.vote_average,
+    userId
+  }
+  const res = await axios.post(BASE_MOVIE_URL + '/like', movieShort)
+  return res.data
+}
+
 async function searchMovieById(movieId) {
   const res = await axios.get(
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TDMB_KEY}&language=en-US`

@@ -16,6 +16,8 @@ export function MovieDetails() {
     loadMovie()
   }, [])
 
+  const user = useSelector(state=>state.user)
+
   async function loadMovie() {
     try {
       const movie = await MovieService.searchMovieById(params.id)
@@ -34,6 +36,15 @@ export function MovieDetails() {
     catch (err) {
       console.error(err)
       dispatch(setMsg({ text: "Movie has not been loaded", condition: false }))
+    }
+  }
+  async function addToLikedMovies(movie){
+    try{
+      const likedMovie = await MovieService.addToLikedMovies(movie,user.user.id)
+      dispatch(setMsg({ text: "Movie added successfully!", condition: true }));
+    }catch(err){
+      console.log(err)
+      dispatch(setMsg({ text: "Movie not added", condition: false }));
     }
   }
 
@@ -73,6 +84,7 @@ export function MovieDetails() {
               </Link>
             )}
           </div>
+          <button className='btn-like' onClick={()=>addToLikedMovies(movie)}>Add to Watch list</button>
 
           <button className='btn-back' onClick={() => navigate('/movies')}>
             🔙 Go Back
