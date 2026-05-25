@@ -16,3 +16,6 @@ export function setItemToLocalStorage(key, value) {
         console.error("Failed to save to localStorage:", key, err);
     }
 }
+export function removeItemFromLocalStorage(key) {
+    localStorage.removeItem(key);
+}

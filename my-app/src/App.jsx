@@ -18,7 +18,6 @@ export function App() {
   async function loadLoggedInUser() {
     try {
       const loggedUser = await authService.getLoggedInUser();
-      console.log(loggedUser)
       if (loggedUser) {
         dispatch(updateUser(loggedUser));
       }

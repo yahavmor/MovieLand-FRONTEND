@@ -1,11 +1,12 @@
 import axios from 'axios'
-import {getItemFromLocalStorage, setItemToLocalStorage } from './localStorage.service'
+import {getItemFromLocalStorage, removeItemFromLocalStorage, setItemToLocalStorage } from './localStorage.service'
 
 const BASE_AUTH_URL = 'http://localhost:3000/api/auth'
 export const authService = {
     signup,
     login,
-    getLoggedInUser
+    getLoggedInUser,
+    logout
 }
 
 async function signup(user){
@@ -33,4 +34,11 @@ async function getLoggedInUser() {
     });
     return res.data;
   }
+
+async function logout() {
+  await axios.post(BASE_AUTH_URL + "/logout",{},{ withCredentials: true });
+  removeItemFromLocalStorage("token");
+  removeItemFromLocalStorage("user");
+}
+
 

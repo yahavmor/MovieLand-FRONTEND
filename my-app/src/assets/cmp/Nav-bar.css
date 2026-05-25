@@ -12,7 +12,7 @@
     list-style: none;
   }
   
-  .nav-bar a {
+  .nav-bar a{
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 500;
@@ -21,7 +21,7 @@
     transition: all .25s ease;
   }
   
-  .nav-bar a:hover {
+  .nav-bar a:hover{
     color: var(--text-primary);
     transform: translateY(-2px);
   }
@@ -29,4 +29,25 @@
   .nav-bar a:active {
     transform: scale(0.96);
   }
-  
+
+
+  .logout-btn {
+  padding: 0.45rem 1.1rem;
+  background: var(--error);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.logout-btn:hover {
+  background: #c0392b; /* כהה יותר מה-error */
+  transform: translateY(-2px);
+}
+
+.logout-btn:active {
+  transform: scale(0.96);
+}
