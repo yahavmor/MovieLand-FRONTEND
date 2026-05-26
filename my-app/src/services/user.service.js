@@ -15,9 +15,8 @@ function defaultUser(){
     }
 }
 
-function checkIfAllFilled(obj){
-  if (!obj) return false;
-  return Object.values(obj).every(value => value.trim() !== "");
+function checkIfAllFilled(obj, fields) {
+  return fields.every(field => obj[field]?.trim() !== "");
 }
 
 
