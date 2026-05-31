@@ -1,10 +1,12 @@
 import axios from 'axios'
 
+const BASE_USER_URL = 'http://localhost:3000/api/user'
 
 export const userService = {
-    checkIfAllFilled,
-    getUserImage,
-    defaultUser
+  checkIfAllFilled,
+  getUserImage,
+  defaultUser,
+  deleteUser
 }
 function defaultUser(){
     return {
@@ -14,6 +16,11 @@ function defaultUser(){
         imgUrl:'1'
     }
 }
+async function deleteUser(userId) {
+  const res = await axios.delete(BASE_USER_URL + `/${userId}`,{ withCredentials: true });
+  return res.data;
+}
+
 
 function checkIfAllFilled(obj, fields) {
   return fields.every(field => obj[field]?.trim() !== "");

@@ -25,10 +25,13 @@ const userSlice = createSlice({
     },
     clearMsg(state) {
       state.msg = { text: "", condition: true }
+    },
+    clearUser(state) {
+      state.user = initialState.user;
     }
   }
 })
 
 
-export const { updateUser, setMsg, clearMsg} = userSlice.actions
+export const { updateUser, setMsg, clearMsg, clearUser} = userSlice.actions
 export default userSlice.reducer
