@@ -11,6 +11,7 @@ export function MovieDetails() {
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [userClickedAddMovie,setUserClickedAddMovie] = useState(true)
 
   useEffect(() => {
     loadMovie()
@@ -42,6 +43,7 @@ export function MovieDetails() {
     try{
       const likedMovie = await MovieService.addToLikedMovies(movie,user.user.id)
       dispatch(setMsg({ text: "Movie added successfully!", condition: true }));
+      setUserClickedAddMovie(false)
     }catch(err){
       console.log(err)
       dispatch(setMsg({ text: "Movie not added", condition: false }));
@@ -84,7 +86,7 @@ export function MovieDetails() {
               </Link>
             )}
           </div>
-          <button className='btn-like' onClick={()=>addToLikedMovies(movie)}>Add to Watch list</button>
+          {userClickedAddMovie&&<button className='btn-like' onClick={()=>addToLikedMovies(movie)}>Add to Watch list</button>}
 
           <button className='btn-back' onClick={() => navigate('/movies')}>
             🔙 Go Back

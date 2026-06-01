@@ -11,8 +11,14 @@ const MovieService = {
   isRealMovie,
   getTrailer,
   explorMovie,
-  addToLikedMovies
+  addToLikedMovies,
+  loadUserMovies
 }
+async function loadUserMovies(userId) {
+  const res = await axios.get(`${BASE_MOVIE_URL}/${userId}`);
+  return res.data;
+}
+
 async function addToLikedMovies(movie, userId) {
   const movieShort = {
     title: movie.title,

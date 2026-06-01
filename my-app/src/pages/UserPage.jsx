@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import userService from '../services/user.service'
 import { setMsg, clearUser } from '../store/userSlice'
+import { MovieList } from '../cmp/MovieList'
 
 
 export function UserPage(){
@@ -31,7 +32,8 @@ export function UserPage(){
             <h1 className='user-name'>Hello {user.user.fullName}</h1>
             <p className='user-email'>{user.user.email}</p>
             <img src={user.user.imgUrl} alt="image of a person " />
-            <button onClick={()=>onDeleteUser(user.user.id)}>Delete Account</button>
+            <MovieList/>
+            <button className='delete-btn' onClick={()=>onDeleteUser(user.user.id)}>Delete Account</button>
         </div>
     )
 }
