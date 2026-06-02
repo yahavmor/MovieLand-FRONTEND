@@ -22,7 +22,7 @@ export function NavBar(){
         <nav className="nav-bar">
             <li><Link to="/">Home Page</Link></li>
             <li><Link to="/about">About</Link></li>
-            <li><Link to="/movies">Movie List</Link></li>
+            {user.user.fullName&&<li><Link to="/movies">Movie List</Link></li>}
             {user.user.fullName?<li><Link to="/me">{user.user.fullName}</Link></li>:<li><Link to="/register">Register</Link></li>}
             {user.user.fullName?<button className='logout-btn' onClick={()=>logout()}>Logout</button>:''}
         </nav>

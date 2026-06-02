@@ -1,66 +1,65 @@
 .movie-preview {
-    background: var(--bg-card);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform .2s ease, box-shadow .2s ease;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    cursor: pointer;
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform .2s ease, box-shadow .2s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
 }
 
 .movie-preview:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .movie-header {
-    font-size: 1.3rem;
-    font-weight: 600;
-    padding: 1rem;
-    background: var( --text-secondary);
-    margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 1rem;
+  background: var(--text-secondary);
+  margin: 0;
 }
 
 .movie-preview img {
-    width: 100%;
-    aspect-ratio: 2/ 3;
-    object-fit: cover;
-    background: var(--bg-light);
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  background: var(--bg-light);
+  margin: auto;
+  margin-top:1em
 }
-
-
 
 
 .movie-info {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .movie-rating {
-    font-size: 1.1rem;
-    margin: .5rem 0;
+  font-size: 1.1rem;
+  margin: .5rem 0;
 }
 
 .movie-date {
-    font-size: 1.2rem;
-    color: var( --text-primary);
+  font-size: 1.2rem;
+  color: var(--text-primary);
 }
 
 .movie-genres {
-    display: flex;
-    justify-content: center;
-    gap: .8rem;
-    flex-wrap: wrap;
-    padding: 0;
-    margin-top: .7rem;
-    list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-top: .7rem;
+  list-style: none;
 }
 
 .movie-genres li {
-    background: var(--bg-light);
-    border-radius: 20px;
-    font-size: 1.2rem;
-    padding: 0.2em 0.6em; 
+  background: var(--bg-light);
+  border-radius: 20px;
+  font-size: 1.2rem;
+  padding: 0.2em 0.6em;
 }
-

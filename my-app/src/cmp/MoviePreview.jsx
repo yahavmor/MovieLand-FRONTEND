@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom'
 export function MoviePreview({ movie }) {
   const navigate = useNavigate()
   const DEFAULT_POSTER = "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png"
+  const poster = movie.poster_path
+  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+  : movie.poster || DEFAULT_POSTER;
 
+  console.log(movie)
   return (
     <div 
       className='movie-preview' 
@@ -13,19 +17,15 @@ export function MoviePreview({ movie }) {
       <h5 className='movie-header'>{movie.title}</h5>
 
       <img
-        src={
-          movie.poster_path 
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
-            : DEFAULT_POSTER
-        }
+        src={poster}
         alt={movie.title}
       />
 
       <div className="movie-info">
-        <p className="movie-rating">⭐ Rating: {movie.vote_average}</p>
+        <p className="movie-rating"> Rating: {movie.vote_average||movie.rating}⭐</p>
 
         <p className='movie-date'>
-          Release Date: {movie.release_date}
+          Release Date: {movie.release_date||movie.date}
         </p>
 
         <p className="movie-plot">
