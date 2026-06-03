@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { authService } from "../services/auth.service";
 import { useNavigate } from 'react-router-dom'
-import { updateUser } from "../store/userSlice";
+import { setMsg, updateUser } from "../store/userSlice";
 
 
 export function NavBar(){   
@@ -13,9 +13,11 @@ export function NavBar(){
         try{
         await authService.logout()
         dispatch(updateUser({ fullName: "", email: "", id: null , imgUrl:''}));            
+        dispatch(setMsg({ text: "User logged out successfully!", condition: true }));
         navigate('/')
         }catch(err){
             console.log(err)
+            dispatch(setMsg({ text: "User didn't logged out!", condition: false }));
         }
     }
     return(

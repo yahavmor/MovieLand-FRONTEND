@@ -6,10 +6,9 @@
 
 .movie-table {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  margin: 0 3em;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 280px));
+  padding: 1em;
   gap: 2rem;
-  padding: 2rem;
   width: 100%;
   max-width: 1400px;
   list-style: none;

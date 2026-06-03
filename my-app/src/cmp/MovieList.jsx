@@ -8,7 +8,6 @@ import { setMsg } from '../store/userSlice.js'
 export function MovieList({movies}){
     const dispatch = useDispatch()
     const user = useSelector(state=>state.user)
-    console.log(movies[0])
     if (!movies || movies.length === 0) return <NoMovies />
     return( 
         <div className='movie-list'>

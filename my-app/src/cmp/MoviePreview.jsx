@@ -7,12 +7,10 @@ export function MoviePreview({ movie }) {
   const poster = movie.poster_path
   ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
   : movie.poster || DEFAULT_POSTER;
-
-  console.log(movie)
   return (
     <div 
       className='movie-preview' 
-      onClick={() => navigate(`/movies/${movie.id}`)}
+      onClick={() => navigate(`/movies/${movie.title}`)}
     >
       <h5 className='movie-header'>{movie.title}</h5>
 

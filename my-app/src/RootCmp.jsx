@@ -14,7 +14,7 @@ export function RootCmp() {
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/about" element={<About />} />
       <Route path="/movies" element={<MovieIndex />} />
-      <Route path="/movies/:id" element={<MovieDetails />} />
+      <Route path="/movies/:title" element={<MovieDetails />} />
       <Route path="/me" element={<UserPage />} />
 
     </Routes>

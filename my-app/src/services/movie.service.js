@@ -27,6 +27,7 @@ async function addToLikedMovies(movie, userId) {
     poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
     date: movie.release_date?.slice(0,4),
     rating: movie.vote_average,
+    id:movie.id,
     userId
   }
   const res = await axios.post(BASE_MOVIE_URL + '/like', movieShort)

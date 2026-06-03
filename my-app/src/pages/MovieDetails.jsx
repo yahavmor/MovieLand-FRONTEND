@@ -12,16 +12,25 @@ export function MovieDetails() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [userClickedAddMovie,setUserClickedAddMovie] = useState(true)
+  const [likedMovies, setLikedMovies] = useState([])
+  const user = useSelector(state=>state.user)
+  const alreadyLiked = movie ? likedMovies.some(m => m.id === movie.id) : false
 
   useEffect(() => {
     loadMovie()
+    loadUserLikedMovies()
   }, [])
 
-  const user = useSelector(state=>state.user)
+  async function loadUserLikedMovies() {
+    if (!user.user.id) return
+    const movies = await MovieService.loadUserMovies(user.user.id)
+    setLikedMovies(movies)
+  }
+
 
   async function loadMovie() {
     try {
-      const movie = await MovieService.searchMovieById(params.id)
+      const movie = await MovieService.searchMovieByName(params.title)
       setMovie(movie)
 
       try {
@@ -40,6 +49,7 @@ export function MovieDetails() {
     }
   }
   async function addToLikedMovies(movie){
+    if(!user.user.id) return dispatch(setMsg({ text: "Please login!", condition: false }));
     try{
       const likedMovie = await MovieService.addToLikedMovies(movie,user.user.id)
       dispatch(setMsg({ text: "Movie added successfully!", condition: true }));
@@ -68,9 +78,9 @@ export function MovieDetails() {
           <h1 className="movie-title">{movie.title}</h1>
 
           <div className="movie-meta">
-            <span>📅 {movie.release_date?.slice(0,4)}</span>
-            <span>⭐ {movie.vote_average}</span>
-            <span>🔥 {movie.popularity}</span>
+            <span> {movie.release_date?.slice(0,4)}📅</span>
+            <span> {movie.vote_average}⭐</span>
+            <span> {movie.popularity}🔥</span>
           </div>
 
           <p className="movie-plot">{movie.overview}</p>
@@ -85,12 +95,15 @@ export function MovieDetails() {
                 Watch Trailer
               </Link>
             )}
+            {!alreadyLiked && (
+              <button className='btn-like' onClick={() => addToLikedMovies(movie)}>
+                Add to Watch list
+              </button>
+            )}
           </div>
-          {userClickedAddMovie&&<button className='btn-like' onClick={()=>addToLikedMovies(movie)}>Add to Watch list</button>}
-
-          <button className='btn-back' onClick={() => navigate('/movies')}>
-            🔙 Go Back
-          </button>
+            <button className='btn-back' onClick={() => navigate(-1)}>
+              🔙 Go Back
+            </button>
         </div>
       </div>
     </div>
