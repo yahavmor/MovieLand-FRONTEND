@@ -12,11 +12,16 @@ const MovieService = {
   getTrailer,
   explorMovie,
   addToLikedMovies,
-  loadUserMovies
+  loadUserMovies,
+  removeMovie
 }
 async function loadUserMovies(userId) {
   const res = await axios.get(`${BASE_MOVIE_URL}/${userId}`);
   return res.data;
+}
+async function removeMovie(movie) {
+  const res = await axios.delete(`${BASE_MOVIE_URL}/${movie.title}`)
+  return res.data
 }
 
 async function addToLikedMovies(movie, userId) {

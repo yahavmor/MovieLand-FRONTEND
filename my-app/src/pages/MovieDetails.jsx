@@ -14,7 +14,7 @@ export function MovieDetails() {
   const [userClickedAddMovie,setUserClickedAddMovie] = useState(true)
   const [likedMovies, setLikedMovies] = useState([])
   const user = useSelector(state=>state.user)
-  const alreadyLiked = movie ? likedMovies.some(m => m.id === movie.id) : false
+  const isAlreadyLiked = movie ? likedMovies.some(m => m.id === movie.id) : false
 
   useEffect(() => {
     loadMovie()
@@ -59,6 +59,17 @@ export function MovieDetails() {
       dispatch(setMsg({ text: "Movie not added", condition: false }));
     }
   }
+  async function removeMovie(movie) {
+    try{
+      await MovieService.removeMovie(movie)
+      dispatch(setMsg({ text: "Movie has been removed successfully!", condition: true }));
+    }catch(err){
+      console.log(err)
+      dispatch(setMsg({ text: "Movie didn't removed!", condition: false }));
+    }
+    console.log(movie)
+    navigate('/me')
+  }
 
   if (!movie) return <div className="loading">Loading...</div>
 
@@ -95,11 +106,14 @@ export function MovieDetails() {
                 Watch Trailer
               </Link>
             )}
-            {!alreadyLiked && (
+            {!isAlreadyLiked && userClickedAddMovie &&(
               <button className='btn-like' onClick={() => addToLikedMovies(movie)}>
                 Add to Watch list
               </button>
             )}
+              {isAlreadyLiked&&<button className='btn-delete' onClick={() => removeMovie(movie)}>
+                Remove movie 
+              </button>}
           </div>
             <button className='btn-back' onClick={() => navigate(-1)}>
               🔙 Go Back

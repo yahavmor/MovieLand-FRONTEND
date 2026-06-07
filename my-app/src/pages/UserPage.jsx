@@ -21,7 +21,6 @@ export function UserPage(){
     try{
         const loadedMovies = await MovieService.loadUserMovies(user.user.id)
         setUserMovies(loadedMovies)
-        dispatch(setMsg({ text: "Movies loaded successfully!", condition: true }));
     }catch(err){
         console.log(err)
         dispatch(setMsg({ text: "Error loading movies!", condition: false }));
