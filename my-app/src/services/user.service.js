@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_USER_URL = 'http://localhost:3000/api/user'
+const BASE_USER_URL = `${import.meta.env.VITE_API_URL}/api/user`
 
 export const userService = {
   checkIfAllFilled,

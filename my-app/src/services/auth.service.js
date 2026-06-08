@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {getItemFromLocalStorage, removeItemFromLocalStorage, setItemToLocalStorage } from './localStorage.service'
 
-const BASE_AUTH_URL = 'http://localhost:3000/api/auth'
+const BASE_AUTH_URL = `${import.meta.env.VITE_API_URL}/api/auth`
 export const authService = {
     signup,
     login,
