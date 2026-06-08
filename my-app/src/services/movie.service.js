@@ -3,7 +3,7 @@ import { getRandInt } from './utils'
 
 const TDMB_KEY = 'eb6c17a5d4e99a8645ef8d325261f6a7'
 const BASE_MOVIE_URL = `${import.meta.env.VITE_API_URL}/api/movie`
-ד
+
 const MovieService = {
   searchMovieByName,
   searchMovieById,
