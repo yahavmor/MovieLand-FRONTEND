@@ -17,8 +17,16 @@ function defaultUser(){
     }
 }
 async function deleteUser(userId) {
-  const res = await axios.delete(BASE_USER_URL + `/${userId}`,{ withCredentials: true });
-  return res.data;
+await axios.delete(
+  BASE_USER_URL + `/${userId}`,
+  {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+);
+
 }
 
 

@@ -10,19 +10,39 @@ export const authService = {
 }
 
 async function signup(user){
-    const res = await axios.post(BASE_AUTH_URL+'/signup',user,{withCredentials:true})  
-    const {token , newUser } = res.data
-    setItemToLocalStorage('token',token)
-    setItemToLocalStorage('user',newUser)
-    return newUser
-} 
-async function login(user){
-    const res = await axios.post(BASE_AUTH_URL+'/login',user,{withCredentials:true})  
-    const {token , loggedUser } = res.data
-    setItemToLocalStorage('token',token)
-    setItemToLocalStorage('user',loggedUser)
-    return loggedUser
+  const res = await axios.post(
+    BASE_AUTH_URL + '/signup',
+    user,
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
+  const { token, newUser } = res.data;
+  setItemToLocalStorage('token', token);
+  setItemToLocalStorage('user', newUser);
+  return newUser;
 }
+
+async function login(user){
+  const res = await axios.post(
+    BASE_AUTH_URL + '/login',
+    user,
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
+  const { token, loggedUser } = res.data;
+  setItemToLocalStorage('token', token);
+  setItemToLocalStorage('user', loggedUser);
+  return loggedUser;
+}
+
 
 async function getLoggedInUser() {
     const token = getItemFromLocalStorage('token')
@@ -36,9 +56,17 @@ async function getLoggedInUser() {
   }
 
 async function logout() {
-  await axios.post(BASE_AUTH_URL + "/logout",{},{ withCredentials: true });
-  removeItemFromLocalStorage("token");
-  removeItemFromLocalStorage("user");
+await axios.post(
+  BASE_AUTH_URL + "/logout",
+  {},
+  {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+);
+
 }
 
 

@@ -35,8 +35,17 @@ async function addToLikedMovies(movie, userId) {
     id:movie.id,
     userId
   }
-  const res = await axios.post(BASE_MOVIE_URL + '/like', movieShort)
-  return res.data
+await axios.post(
+  BASE_MOVIE_URL + '/like',
+  movieShort,
+  {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+);
+
 }
 
 async function searchMovieById(movieId) {
