@@ -5,7 +5,7 @@ Modern end‑to‑end **React**, **Redux Toolkit**, and **Vite** application for
 
 MovieLand provides a clean, modern UI inspired by streaming platforms, with smooth navigation, dynamic search, and user‑specific movie collections powered by a secure backend.
 
-<img width="1660" height="905" alt="image" src="https://github.com/user-attachments/assets/6d763e03-557b-4efc-8249-547135fcb549" />
+<img width="972" alt="MovieLand movie list" src="screenshot.png" />
 
 Built by **Yahav Mor**.
 
